@@ -58,7 +58,7 @@ print(principios_json.results)
 ```
 
 ## Reportando problemas
-Se você tem sugestões, bugs ou otros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.
+Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.
 
 ## API
 Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras dúvidas sobre a API, consulte a documentação oficial da API do Interage [aqui]( http://api.interage.intmed.com.br/docs/).

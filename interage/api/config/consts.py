@@ -1,6 +1,6 @@
 # API General
 VERSION = 'v1'
-API_URL = 'http://api.interage.intmed.com.br'
+API_URL = 'https://api.interage.intmed.com.br'
 AUTH_KEYS = ['username', 'password']
 
 # URIs

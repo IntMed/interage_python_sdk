@@ -1,8 +1,7 @@
 # Interage Python SDK
-SDK para desenvolvimento de aplicações em Python integradas com a API de interações medicamentosas do Interage criada pela IntMed Software.
+SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema Interage. Utiliza protocolos HTTP para se comunicar com uma API. É simples e bastante idiomático para Python.
 
-É um SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) que se conecta a base de dados do sistema Interage por meio de requisições à uma API Rest usando protocolos HTTP. É simples e bastante idiomático para python.
-
+A documentação oficial da API pode ser encontrada em http://api.interage.intmed.com.br/docs/ 
 
 ## Instalação
 ### PIP

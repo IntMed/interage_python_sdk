@@ -50,7 +50,7 @@ interacoes  = client.interacoes.filter(principios_ativos= [17, 443, 648, 1200], 
 ### Retornando instâncias como JSON
 Os valores retornados pelos managers são instâncias dos tipos `Medicamento`, `PrincipioAtivo` e `Interacao`. Porém é possível retornar instâncias como JSONs. 
 
-Para isso basta passar o argumento `as_json` como `True` para cada um dos métodos dos managers. Para os métodos `filter` e `all` são retornados objetos do tipo `APIJsonResult` que armazenam os dados retornados pela API como número de dados encontrados, resultados, URLs das páginas posteriores e anteriores, etc. O método `get`, por retornar apenas um item, retorna um JSON puro sem nenhum tipo de estrutura mais complexa.
+Para isso basta passar o argumento `as_json` como `True` para cada um dos métodos dos managers. Para os métodos `filter` e `all` são retornados objetos do tipo `APIJsonResult` que armazenam os dados retornados pela API como número de dados encontrados, resultados, URLs das páginas posteriores e anteriores, etc. O método `get`, por retornar apenas um item, retorna um JSON puro sem nenhum tipo de estrutura mais complexa para gerenciá-lo. Veja o exemplo abaixo:
 
 ```python
 principios_json = client.medicamentos.filter(search = 'paracetamol', as_json = True)

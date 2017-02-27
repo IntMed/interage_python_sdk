@@ -65,3 +65,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 
 ## Versão
 - 0.1.0 - 27/02/2017 - Primeira release
+- 0.1.1 - 27/02/2017 - Correção de erro crash do pacote utils

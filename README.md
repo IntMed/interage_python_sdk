@@ -1,3 +1,5 @@
+[![PyPi version](https://img.shields.io/pypi/v/interage_python_sdk.svg)](https://pypi.python.org/pypi/interage_python_sdk)
+
 # Interage Python SDK
 SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema Interage. Desenvolvido para ser simples e idiomático para Python, o SDK se comunica com uma API RESTful via protocolo HTTPS. 
 
@@ -61,7 +63,7 @@ print(principios_json.results)
 Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.
 
 ## API
-Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras dúvidas sobre a API, consulte a documentação oficial da API do Interage [aqui]( http://api.interage.intmed.com.br/docs/).
+Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras dúvidas sobre a API, consulte a documentação oficial da API do Interage [aqui]( https://api.interage.intmed.com.br/docs/).
 
 ## Versão
 - 0.1.0 - 27/02/2017 - Primeira release

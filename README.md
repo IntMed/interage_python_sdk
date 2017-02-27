@@ -26,7 +26,7 @@ for m in medicamentos:
   print(m.nome)
 ```
 
-Você também pode criar um cliente passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries):
+Você também pode criar um cliente passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
 ```python
 client = InterageAPI.client(auth = { 'username': 'your-username', 'password': 'your-password'})
 ```

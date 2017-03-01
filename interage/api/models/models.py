@@ -40,6 +40,15 @@ class Medicamento(APIModel):
     def principios_ativos(self, val):
         self.__principios_ativos = val
 
+    @property
+    def principios_ativos_anvisa(self):
+        return self.__principios_ativos_anvisa
+
+    @principios_ativos_anvisa.setter
+    @PropertyDescriptor.list
+    def principios_ativos_anvisa(self, val):
+        self.__principios_ativos_anvisa = val
+
     @classmethod
     def create_instance_from_json(cls, json):
         instance = Medicamento()

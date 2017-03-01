@@ -10,8 +10,10 @@ class APIClient(object):
         self.url = args.get('url', APISettings.url)
         self.__handle_auth(args.get('auth'))
 
-    def request(self, uri = '', params = None):
-        response = requests.get(APISettings.get_full_url(uri), headers = { 'Authorization': 'Token ' + self.token }, params = params)
+    def request(self, url = '', params = None):
+        if(APISettings.url not in url):
+            url = APISettings.get_full_url(url)
+        response = requests.get(url, headers = { 'Authorization': 'Token ' + self.token }, params = params)
 
         if(response.status_code == 403):
             raise InvalidCredentialsError(response.json().get('detail', messages.invalid_credentials_error))

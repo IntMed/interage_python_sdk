@@ -20,7 +20,7 @@ Para começar, instale o Interage Python SDK, crie um objeto `APIClient` passand
 from interage.api import InterageAPI
 
 client = InterageAPI.client(auth = 'your-api-token')
-medicamentos = client.medicamentos.filter([search = 'acido'])
+medicamentos = client.medicamentos.filter(search = 'acido').objects()
 
 for m in medicamentos:
   print(m.nome)
@@ -40,25 +40,33 @@ Um objeto `APIClient` contém referências para três objetos do tipo `APIManage
 Estes gerenciadores são capazes de recuperar, listar e filtrar dados específicos da API:
 
 ```python
-from interage.api import InterageAPI
-
-client = InterageAPI.client(auth = 'your-api-token')
-
-medicamento = client.medicamentos.get(145) # Retorna o medicamento com o identificador (id) 145
-principios  = client.principios_ativos.all() # Lista todos os princípios ativos do sistema
-interacoes  = client.interacoes.filter(principios_ativos= [17, 443, 648, 1200], gravidade = 'grave')  # Retorna todas as interações medicamentosas graves entre os principios ativos com os identificadores 17, 443, 648 e 1200
+client.medicamentos.get(145) # Retorna o medicamento com o identificador (id) 145
+client.principios_ativos.all() # Lista todos os princípios ativos do sistema
+client.interacoes.filter(principios_ativos = [17, 443, 648, 1200], gravidade = 'grave')  # Retorna todas as interações medicamentosas graves entre os principios ativos com os identificadores 17, 443, 648 e 1200
 ```
-
-### Retornando instâncias como JSON
-Os valores retornados pelos managers são instâncias dos tipos `Medicamento`, `PrincipioAtivo` e `Interacao`. Porém é possível retornar instâncias como JSONs. 
-
-Para isso basta passar o argumento `as_json` como `True` para cada um dos métodos dos managers. Para os métodos `filter` e `all` são retornados objetos do tipo `APIJsonResult` que armazenam os dados retornados pela API como número de dados encontrados, resultados, URLs das páginas posteriores e anteriores, etc. O método `get`, por retornar apenas um item, retorna um JSON puro sem nenhum tipo de estrutura mais complexa para gerenciá-lo. Veja o exemplo abaixo:
+### Tipos de retorno e paginação
+Os métodos dos managers que retornam mais de um resultado (`all()` e `filter()`) são encapsulados em um objeto do tipo `APIResult`. Este objeto é capaz de retornar os resultados fornecidos pela API como JSON ou como lista de instâncias das classes `PrincipioAtivo`, `Medicamento` ou `Interacao` através dos métodos, reespectivamente, `json()` e `objects()`:
 
 ```python
-principios_json = client.medicamentos.filter(search = 'paracetamol', as_json = True)
-print(principios_json.results)
+results = client.medicamentos.all()
+medicamentos = results.objects() # Lista de instâncias da classe Medicamento
+medicamentos_json = results.json() # JSON com lista de medicamentos
+
+for m in medicamentos:
+  print(m.nome)
+ 
+for m in medicamentos_json:
+  print(m['nome'])
 ```
 
+Os métodos de managers que retornam resultado único retornam por default uma instância do modelo referente ao manager. Caso necessite que o objeto seja retornado como JSON, basta passar o valor `True` para o argumento `as_json`:
+```python
+principio_ativo = client.principios_ativos.get(5)
+principio_ativo_json = client.principios_ativos.get(5, as_json = True)
+
+print(principio_ativo.nome)
+print(principio_ativo_json['nome'])
+```
 ## Reportando problemas
 Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.
 

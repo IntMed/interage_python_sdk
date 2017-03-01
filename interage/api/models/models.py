@@ -54,6 +54,7 @@ class Medicamento(APIModel):
         instance = Medicamento()
         instance.id = json['id']
         instance.nome = json['nome']
+        instance.principios_ativos_anvisa = json['principios_ativos_anvisa']
         instance.principios_ativos = json_to_instance_list(PrincipioAtivo, json['principios_ativos'])
 
         return instance

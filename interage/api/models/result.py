@@ -43,12 +43,11 @@ class APIResult(object):
 
         raise HttpNotFoundError()
 
-    def results(self, as_json = False):
-        if(as_json):
-            return self.__results
-
-        return json_to_instance_list(self.model_class, self.__results)
-
-    @property
     def count(self):
         return self.__count
+
+    def json(self):
+        return self.__results
+
+    def objects(self):
+        return json_to_instance_list(self.model_class, self.__results)

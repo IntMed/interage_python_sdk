@@ -19,7 +19,7 @@ class APIManager(metaclass = ABCMeta):
         return self.__get_result_object(result)
 
     def filter(self, **params):
-        response = self.client.request(self.uri, params = params)
+        result = self.client.request(self.uri, params = params)
         return self.__get_result_object(result)
 
     def __get_result_object(self, result):

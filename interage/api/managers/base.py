@@ -9,22 +9,22 @@ class APIManager(metaclass = ABCMeta):
 
     def get(self, id, as_json = False):
         result = self.client.request(self.uri + str(id))
-        return self.__handle_result(result, as_json)
+        if(as_json):
+            return result
 
-    def all(self, as_json = False):
-        result =  models.APIJsonResult(self.client.request(self.uri))
-        return self.__handle_result(result, as_json)
+        return self.model_class.create_instance_from_json(result)
+
+    def all(self):
+        result = self.client.request(self.uri)
+        return self.__get_result_object(result)
 
     def filter(self, **params):
-        as_json = params.get('as_json', False)
-        result = models.APIJsonResult(self.client.request(self.uri, params = params))
-        return self.__handle_result(result, as_json)
+        response = self.client.request(self.uri, params = params)
+        return self.__get_result_object(result)
 
-    def __handle_result(self, result, as_json):
-        if(not as_json):
-            if(isinstance(result, models.APIJsonResult)):
-                result = result.to_instance_list(self.model_class)
-            else:
-                result = self.model_class.create_instance_from_json(result)
-
-        return result
+    def __get_result_object(self, result):
+        return models.APIResult(
+            response = result,
+            client = self.client,
+            model_class = self.model_class,
+        )

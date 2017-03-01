@@ -10,11 +10,18 @@ class APIResult(object):
         self.model_class = args.get('model_class')
         self.__load_from_response(args.get('response'))
 
-    def __load_from_response(response):
+    def __load_from_response(self, response):
         self.__count    = response.get('count', 0)
         self.__results  = response.get('results', [])
         self.__next     = response.get('next', None)
         self.__previous = response.get('previous', None)
+
+    def __get_result_object(self, result):
+        return APIResult(
+            response = result,
+            client = self.client,
+            model_class = self.model_class,
+        )
 
     def has_next(self):
         return self.__next is not None
@@ -24,29 +31,24 @@ class APIResult(object):
 
     def next(self):
         if(self.has_next):
-            response = client.request(get_uri_from_full_url(self.__next))
-            return APIResult(client = self.client, model_class = self.model_class, response = response)
+            result = self.client.request(self.__next)
+            return self.__get_result_object(result)
 
         raise HttpNotFoundError()
 
     def previous(self):
         if(self.has_previous):
-            response = client.request(get_uri_from_full_url(self.__previous))
-            return APIResult(client = self.client, model_class = self.model_class, response = response)
+            result = self.client.request(self.__previous)
+            return self.__get_result_object(result)
 
         raise HttpNotFoundError()
 
     def results(self, as_json = False):
         if(as_json):
-            return self.results
+            return self.__results
 
         return json_to_instance_list(self.model_class, self.__results)
 
     @property
     def count(self):
         return self.__count
-
-
-
-def get_uri_from_full_url(url):
-    return url.replace(APISettings.url + '/' + APISettings.version + '/', '')

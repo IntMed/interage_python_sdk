@@ -86,3 +86,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 ## Versão
 - 0.1.0 - 27/02/2017 - Primeira release
 - 0.1.1 - 27/02/2017 - Correção de erro crash do pacote utils e mudança de protocolo para HTTPS
+- 0.2.0 - 01/03/2017 - Suporte para paginação e adição do campo principios_ativos_anvisa em medicamentos

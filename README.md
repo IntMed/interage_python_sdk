@@ -23,7 +23,7 @@ client = InterageAPI.client(auth = 'your-api-token')
 medicamentos = client.medicamentos.filter(search = 'acido').objects()
 
 for m in medicamentos:
-  print(m.nome)
+    print(m.nome)
 ```
 
 Você também pode criar um cliente passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
@@ -53,10 +53,10 @@ medicamentos = results.objects() # Lista de instâncias da classe Medicamento
 medicamentos_json = results.json() # JSON com lista de medicamentos
 
 for m in medicamentos:
-  print(m.nome)
+    print(m.nome)
  
 for m in medicamentos_json:
-  print(m['nome'])
+    print(m['nome'])
 ```
 
 Os métodos de managers que retornam resultado único retornam por default uma instância do modelo referente ao manager. Caso necessite que o objeto seja retornado como JSON, basta passar o valor `True` para o argumento `as_json`:
@@ -66,6 +66,16 @@ principio_ativo_json = client.principios_ativos.get(5, as_json = True)
 
 print(principio_ativo.nome)
 print(principio_ativo_json['nome'])
+```
+Os resultados em um `APIResult` são paginados de acordo com os parâmetros passados aos métodos dos managers. Através dos métodos `next()` e `previous()` são retornados uma nova instância de `APIResult` referentes a página posterior e anterior do resultado corrente, reespectivamente. Os métodos `has_next()` e `has_previous()` podem ajudar a saber se as referências para estas páginas existem:
+
+```python
+result = client.principios_ativos.filter(search = 'ra', page_size = 50)
+while(result.has_next()):
+  objects = result.objects()
+  for i in range(len(objects)):
+      print(objects[i].nome)
+  result = result.next()
 ```
 ## Reportando problemas
 Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.

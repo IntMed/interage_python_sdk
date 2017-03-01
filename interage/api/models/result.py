@@ -47,7 +47,13 @@ class APIResult(object):
         return self.__count
 
     def json(self):
-        return self.__results
+        return self.results(as_json = True)
 
     def objects(self):
+        return self.results(as_json = False)
+
+    def results(self, as_json):
+        if(as_json):
+            return self.__results
+
         return json_to_instance_list(self.model_class, self.__results)

@@ -9,6 +9,35 @@ class APIClient(object):
         super(APIClient, self).__init__()
         self.url = args.get('url', APISettings.url)
         self.__handle_auth(args.get('auth'))
+        self.__init_managers()
+
+    def __init_managers(self):
+        self.__managers = {}
+        self.__managers['interacoes'] =  managers.InteracaoAPIManager(client = self)
+        self.__managers['medicamentos'] = managers.MedicamentoAPIManager(client = self)
+        self.__managers['principios_ativos'] = managers.PrincipioAtivoAPIManager(client = self)
+
+    def __handle_auth(self, auth):
+        if(auth is None):
+            raise AttributeError(messages.empty_arg_error.format('auth'))
+
+        if(isinstance(auth, dict)):
+            if(any([key in APISettings.auth_keys for key in auth])):
+                self.token = self.__obtain_token(auth)
+            else:
+                raise AttributeError(messages.invalid_key_arg_error.format('auth', APISettings.auth_keys))
+        else:
+            self.token = auth
+            self.request()
+
+    def __obtain_token(self, auth):
+        response = requests.post(APISettings.get_full_url(APISettings.uris.obtain_token, append_version = False), data = auth)
+
+        if(response.status_code == 400):
+            raise InvalidCredentialsError(response.json().get('non_field_errors', messages.invalid_credentials_error))
+
+        return response.json()['token']
+
 
     def request(self, url = '', params = None):
         if(APISettings.url not in url):
@@ -22,36 +51,14 @@ class APIClient(object):
 
         return response.json()
 
-    def obtain_token(self, auth):
-        response = requests.post(APISettings.get_full_url(APISettings.uris.obtain_token, append_version = False), data = auth)
-
-        if(response.status_code == 400):
-            raise InvalidCredentialsError(response.json().get('non_field_errors', messages.invalid_credentials_error))
-
-        return response.json()['token']
-
     @property
     def medicamentos(self):
-        return managers.MedicamentoAPIManager(client = self)
+        return self.__managers['medicamentos']
 
     @property
     def principios_ativos(self):
-        return managers.PrincipioAtivoAPIManager(client = self)
+        return self.__managers['principios_ativos']
 
     @property
     def interacoes(self):
-        return managers.InteracaoAPIManager(client = self)
-
-
-    def __handle_auth(self, auth):
-        if(auth is None):
-            raise AttributeError(messages.empty_arg_error.format('auth'))
-
-        if(isinstance(auth, dict)):
-            if(any([key in APISettings.auth_keys for key in auth])):
-                self.token = self.obtain_token(auth)
-            else:
-                raise AttributeError(messages.invalid_key_arg_error.format('auth', APISettings.auth_keys))
-        else:
-            self.token = auth
-            self.request()
+        return self.__managers['interacoes']

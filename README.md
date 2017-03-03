@@ -33,9 +33,9 @@ client = InterageAPI(auth = { 'username': 'your-username', 'password': 'your-pas
 
 ### Managers
 Um objeto `InterageAPI` contém referências para três objetos do tipo `APIManager`, que são basicamente gerenciadores de recursos mantidos pela API. São eles:
-- `medicamentos` - Gerenciador dos recursos responsáveis pelos dados de medicamentos. Endpoint `/v1/medicamentos/`
-- `principios_ativos` - Gerenciador dos recursos responsáveis pelos dados de princípios ativos. Endpoint `/v1/principios-ativos/`
-- `interacoes` - Gerenciador dos recursos responsáveis pelos dados de interações medicamentosas entre princípios ativos. Endpoint `/v1/interacoes/`
+- `medicamentos` - Gerenciador dos recursos responsáveis pelos dados de medicamentos. Recurso `/v1/medicamentos/`
+- `principios_ativos` - Gerenciador dos recursos responsáveis pelos dados de princípios ativos. Recurso `/v1/principios-ativos/`
+- `interacoes` - Gerenciador dos recursos responsáveis pelos dados de interações medicamentosas entre princípios ativos. Recurso `/v1/interacoes/`
 
 Estes gerenciadores são capazes de recuperar, listar e filtrar dados específicos da API:
 

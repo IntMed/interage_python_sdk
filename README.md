@@ -14,7 +14,7 @@ pip install interage_python_sdk
 - [Requests](https://github.com/kennethreitz/requests) - O Interage Python SDK necessita que o pacote esteja instalado
 
 ## Quick Start
-Para começar, instale o Interage Python SDK, crie um objeto `InterageAPI` passando o seu token para o argumento `auth` e invoque seus métodos:
+Para começar, instale o Interage Python SDK, crie um objeto `InterageAPI` passando o seu token para o argumento `auth` e invocando seus métodos:
 
 ```python
 from interage.api import InterageAPI

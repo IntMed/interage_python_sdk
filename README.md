@@ -26,16 +26,16 @@ for m in medicamentos:
     print(m.nome)
 ```
 
-Você também pode criar o objeto passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
+Você também pode criar um objeto `InterageAPI` passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
 ```python
 client = InterageAPI(auth = { 'username': 'your-username', 'password': 'your-password'})
 ```
 
 ### Managers
-Um objeto `InterageAPI` contém referências para três objetos do tipo `APIManager`, que são basicamente gerenciadores dos dados mantidos pela API. São eles:
-- `medicamentos` - Gerenciador dos dados sobre medicamentos. Endpoint '/v1/medicamentos/'
-- `principios_ativos` - Gerenciador dos dados de princípios ativos. Endpoint '/v1/principios-ativos/'
-- `interacoes` - Gerenciador dos dados de interações medicamentosas entre princípios ativos. Endpoint '/v1/interacoes/'
+Um objeto `InterageAPI` contém referências para três objetos do tipo `APIManager`, que são basicamente gerenciadores de recursos mantidos pela API. São eles:
+- `medicamentos` - Gerenciador dos recursos responsáveis pelos dados de medicamentos. Endpoint '/v1/medicamentos/'
+- `principios_ativos` - Gerenciador dos recursos responsáveis pelos dados de princípios ativos. Endpoint '/v1/principios-ativos/'
+- `interacoes` - Gerenciador dos recursos responsáveis pelos dados de interações medicamentosas entre princípios ativos. Endpoint '/v1/interacoes/'
 
 Estes gerenciadores são capazes de recuperar, listar e filtrar dados específicos da API:
 

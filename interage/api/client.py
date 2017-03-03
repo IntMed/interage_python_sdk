@@ -9,13 +9,6 @@ class APIClient(object):
         super(APIClient, self).__init__()
         self.url = args.get('url', APISettings.url)
         self.__handle_auth(args.get('auth'))
-        self.__init_managers()
-
-    def __init_managers(self):
-        self.__managers = {}
-        self.__managers['interacoes'] =  managers.InteracaoAPIManager(client = self)
-        self.__managers['medicamentos'] = managers.MedicamentoAPIManager(client = self)
-        self.__managers['principios_ativos'] = managers.PrincipioAtivoAPIManager(client = self)
 
     def __handle_auth(self, auth):
         if(auth is None):
@@ -50,15 +43,3 @@ class APIClient(object):
             raise HttpNotFoundError(response)
 
         return response.json()
-
-    @property
-    def medicamentos(self):
-        return self.__managers['medicamentos']
-
-    @property
-    def principios_ativos(self):
-        return self.__managers['principios_ativos']
-
-    @property
-    def interacoes(self):
-        return self.__managers['interacoes']

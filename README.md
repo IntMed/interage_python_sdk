@@ -87,10 +87,10 @@ Os resultados em um `APIResult` são paginados de acordo com os parâmetros pass
 ```python
 result = api.principios_ativos.filter(search = 'ra', page_size = 50)
 while(result.has_next()):
-  objects = result.objects()
-  for i in range(len(objects)):
-      print(objects[i].nome)
-  result = result.next()
+    objects = result.objects()
+    for i in range(len(objects)):
+        print(objects[i].nome)
+    result = result.next()
 ```
 ## Reportando problemas
 Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.

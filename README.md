@@ -44,6 +44,21 @@ api.medicamentos.get(145) # Retorna o medicamento com o identificador (id) 145
 api.principios_ativos.all() # Lista todos os princípios ativos do sistema
 api.interacoes.filter(principios_ativos = [17, 443, 648, 1200], gravidade = 'grave')  # Retorna todas as interações medicamentosas graves entre os principios ativos com os identificadores 17, 443, 648 e 1200
 ```
+
+Os managers `principios_ativos` e `interacoes` contém comportamento extra. No manager `pricipios_ativos` é possível recuperar todas as interações medicamentosas que um princípio ativo específico possua:
+```python
+api.principios_ativos.interacoes(1) # Retorna todas as interações encontradas com o princípio ativo de identificador (id) igual a 1
+```
+No manager `interacoes` é possível verificar todos os metadados referentes a uma interação medicamentosa. O método retorna um objeto do tipo `InteracaoMetadata`:
+
+```python
+metadata = api.interacoes.metadata()
+
+print(metadata.gravidades) # ['Nada esperado', 'Moderada', 'Leve', 'Grave', 'Gravidade desconhecida']
+print(metadata.evidencias) # ['Teórica', 'Extensa', 'Caso', 'Estudo']
+print(metadata.acoes) # ['Ajustar', 'Monitorar', 'Informar', 'Nenhuma', 'Evitar']
+```
+
 ### Tipos de retorno e paginação
 Os métodos dos managers que retornam mais de um resultado (`all()` e `filter()`) são encapsulados em um objeto do tipo `APIResult`. Este objeto é capaz de retornar os resultados fornecidos pela API como JSON ou como lista de instâncias das classes `PrincipioAtivo`, `Medicamento` ou `Interacao` através dos métodos, reespectivamente, `json()` e `objects()`:
 

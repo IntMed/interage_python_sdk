@@ -12,7 +12,6 @@ class APIManagerMetadataMixin:
 
 class APIManagerInteracoesMixin:
     def interacoes(self, id, **params):
-        as_json = params.get('as_json', False)
         result = self.client.request(self.uri + str(id) + '/' + APISettings.uris.interactions, params = params)
         return APIResult(
             response = result,

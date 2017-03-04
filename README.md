@@ -26,7 +26,7 @@ for m in medicamentos:
     print(m.nome)
 ```
 
-Você também pode criar um objeto `InterageAPI` passando as suas credencias (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
+Você também pode criar um objeto `InterageAPI` passando as suas credenciais (`username` e `password`) da API na forma de [dicionário](https://docs.python.org/2/tutorial/datastructures.html#dictionaries) para o argumento `auth`:
 ```python
 client = InterageAPI(auth = { 'username': 'your-username', 'password': 'your-password'})
 ```
@@ -88,3 +88,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 - 0.1.1 - 27/02/2017 - Correção de erro crash do pacote utils e mudança de protocolo para HTTPS
 - 0.2.0 - 01/03/2017 - Suporte para paginação e adição do campo principios_ativos_anvisa em medicamentos
 - 0.2.1 - 02/03/2017 - Correção de instanciações de managers desnecessárias em um mesmo client
+- 0.2.2 - 04/03/2017 - Melhorias de código e mudança de responsabilidade dos managers para InterageAPI

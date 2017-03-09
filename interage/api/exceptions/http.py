@@ -3,11 +3,12 @@ import inspect
 from . import messages
 
 class HttpError(Exception):
+    response_attr = 'detail'
     def __init__(self, response):
         try:
             except_message = response.json()[self.response_attr]
             if(isinstance(except_message, list)):
-                except_message = ' '.join(except_message)
+                except_message = except_message[0]
         except:
             except_message = self.default_message
         finally:
@@ -21,13 +22,15 @@ class HttpBadRequestError(HttpError):
 
 class HttpForbiddenError(HttpError):
     status_code = 403
-    response_attr = 'detail'
     default_message = messages.invalid_credentials_error
 
 class HttpNotFoundError(HttpError):
     status_code = 404
-    json_property = 'detail'
     default_message = messages.http_not_found_error
+
+class HttpTooManyRequestsError(HttpError):
+    status_code = 429
+    default_message = messages.to_many_requests_error
 
 def is_http_error_subclass(cls):
     return inspect.isclass(cls) and cls != HttpError and issubclass(cls, HttpError)

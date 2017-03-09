@@ -7,3 +7,4 @@ unknow_property_assignment_error  = "Property '{0}' must be one of theese values
 empty_arg_error = "Argument {0} was not specified"
 invalid_credentials_error = "Invalid credentials"
 http_error_base = "(Error {0}) {1}"
+to_many_requests_error = "Too many requests."

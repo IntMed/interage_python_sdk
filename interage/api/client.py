@@ -2,6 +2,7 @@ import requests
 from interage.api.exceptions import InvalidCredentialsError, HttpNotFoundError
 from interage.api.config import APISettings
 from interage.api.exceptions import messages
+from interage.api.exceptions import get_http_error
 from interage.api import managers
 
 class APIClient(object):
@@ -22,6 +23,12 @@ class APIClient(object):
         else:
             self.token = auth
             self.request()
+
+    def __handle_http_error(self, response):
+        error = get_http_error(response)
+
+        if(error is not None):
+            raise error(response)
 
     def __obtain_token(self, auth):
         response = requests.post(APISettings.get_full_url(APISettings.uris.obtain_token, append_version = False), data = auth)

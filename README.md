@@ -1,7 +1,7 @@
 [![PyPi version](https://img.shields.io/pypi/v/interage_python_sdk.svg)](https://pypi.python.org/pypi/interage_python_sdk)
 
 # Interage Python SDK
-SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema Interage. Desenvolvido para ser simples e idiomático para Python, o SDK comunica-se com uma API RESTful via protocolo HTTPS. 
+SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema [Interage](http://intmed.com.br/interage/). Desenvolvido para ser simples e idiomático para Python, o SDK comunica-se com uma API RESTful via protocolo HTTPS. 
 
 ## Instalação
 ### PIP
@@ -31,6 +31,8 @@ Você também pode criar um objeto `InterageAPI` passando as suas credenciais (`
 client = InterageAPI(auth = { 'username': 'your-username', 'password': 'your-password'})
 ```
 
+Qualquer credencial inválida passada no construtor de `InterageAPI` lançará uma exceção e o objeto não será criado.
+
 ### Managers
 Um objeto `InterageAPI` contém referências para três objetos do tipo `APIManager`, que são basicamente gerenciadores de recursos mantidos pela API. São eles:
 - `medicamentos` - Gerenciador dos recursos responsáveis pelos dados de medicamentos. Recurso `/v1/medicamentos/`
@@ -45,7 +47,7 @@ api.principios_ativos.all() # Lista todos os princípios ativos do sistema
 api.interacoes.filter(principios_ativos = [17, 443, 648, 1200], gravidade = 'grave')  # Retorna todas as interações medicamentosas graves entre os principios ativos com os identificadores 17, 443, 648 e 1200
 ```
 
-Os managers `principios_ativos` e `interacoes` contém comportamento extra. O manager `principios_ativos` é capaz recuperar todas as interações medicamentosas que um princípio ativo específico possua:
+Os managers `principios_ativos` e `interacoes` contém comportamento extra. O manager `principios_ativos` é capaz de recuperar todas as interações medicamentosas que um princípio ativo específico possua:
 ```python
 api.principios_ativos.interacoes(1) # Retorna todas as interações encontradas com o princípio ativo de identificador (id) igual a 1
 ```
@@ -104,3 +106,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 - 0.2.0 - 01/03/2017 - Suporte para paginação e adição do campo principios_ativos_anvisa em medicamentos
 - 0.2.1 - 02/03/2017 - Correção de instanciações de managers desnecessárias em um mesmo client
 - 0.2.2 - 04/03/2017 - Melhorias de código e mudança de responsabilidade dos managers para InterageAPI
+- 0.2.3 - 09/03/2017 - Melhoria no tratamento de erros HTTP

@@ -1,7 +1,7 @@
 import requests
-from interage.api.exceptions import InvalidCredentialsError, HttpNotFoundError
 from interage.api.config import APISettings
 from interage.api.exceptions import messages
+from interage.api.exceptions import get_http_error
 from interage.api import managers
 
 class APIClient(object):
@@ -23,23 +23,22 @@ class APIClient(object):
             self.token = auth
             self.request()
 
+    def __handle_http_error(self, response):
+        error = get_http_error(response)
+
+        if(error is not None):
+            raise error(response)
+
     def __obtain_token(self, auth):
         response = requests.post(APISettings.get_full_url(APISettings.uris.obtain_token, append_version = False), data = auth)
-
-        if(response.status_code == 400):
-            raise InvalidCredentialsError(response.json().get('non_field_errors', messages.invalid_credentials_error))
-
+        self.__handle_http_error(response)
         return response.json()['token']
 
 
     def request(self, url = '', params = None):
         if(APISettings.url not in url):
             url = APISettings.get_full_url(url)
+
         response = requests.get(url, headers = { 'Authorization': 'Token ' + self.token }, params = params)
-
-        if(response.status_code == 403):
-            raise InvalidCredentialsError(response.json().get('detail', messages.invalid_credentials_error))
-        if(response.status_code == 404):
-            raise HttpNotFoundError(response)
-
+        self.__handle_http_error(response)
         return response.json()

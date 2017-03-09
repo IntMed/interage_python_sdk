@@ -1,7 +1,7 @@
 [![PyPi version](https://img.shields.io/pypi/v/interage_python_sdk.svg)](https://pypi.python.org/pypi/interage_python_sdk)
 
 # Interage Python SDK
-SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema Interage. Desenvolvido para ser simples e idiomático para Python, o SDK comunica-se com uma API RESTful via protocolo HTTPS. 
+SDK oficialmente mantido pela [IntMed Software](http://intmed.com.br/) para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema [Interage](http://intmed.com.br/interage/). Desenvolvido para ser simples e idiomático para Python, o SDK comunica-se com uma API RESTful via protocolo HTTPS. 
 
 ## Instalação
 ### PIP
@@ -106,3 +106,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 - 0.2.0 - 01/03/2017 - Suporte para paginação e adição do campo principios_ativos_anvisa em medicamentos
 - 0.2.1 - 02/03/2017 - Correção de instanciações de managers desnecessárias em um mesmo client
 - 0.2.2 - 04/03/2017 - Melhorias de código e mudança de responsabilidade dos managers para InterageAPI
+- 0.2.3 - 09/03/2017 - Melhoria no tratamento de erros HTTP

@@ -31,6 +31,8 @@ Você também pode criar um objeto `InterageAPI` passando as suas credenciais (`
 client = InterageAPI(auth = { 'username': 'your-username', 'password': 'your-password'})
 ```
 
+Qualquer credencial inválida passada no construtor de `InterageAPI` lançará uma exceção e o objeto não será criado.
+
 ### Managers
 Um objeto `InterageAPI` contém referências para três objetos do tipo `APIManager`, que são basicamente gerenciadores de recursos mantidos pela API. São eles:
 - `medicamentos` - Gerenciador dos recursos responsáveis pelos dados de medicamentos. Recurso `/v1/medicamentos/`
@@ -45,7 +47,7 @@ api.principios_ativos.all() # Lista todos os princípios ativos do sistema
 api.interacoes.filter(principios_ativos = [17, 443, 648, 1200], gravidade = 'grave')  # Retorna todas as interações medicamentosas graves entre os principios ativos com os identificadores 17, 443, 648 e 1200
 ```
 
-Os managers `principios_ativos` e `interacoes` contém comportamento extra. O manager `principios_ativos` é capaz recuperar todas as interações medicamentosas que um princípio ativo específico possua:
+Os managers `principios_ativos` e `interacoes` contém comportamento extra. O manager `principios_ativos` é capaz de recuperar todas as interações medicamentosas que um princípio ativo específico possua:
 ```python
 api.principios_ativos.interacoes(1) # Retorna todas as interações encontradas com o princípio ativo de identificador (id) igual a 1
 ```

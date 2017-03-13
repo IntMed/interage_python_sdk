@@ -10,6 +10,6 @@ setup(
   author_email = 'contato@intmed.com.br',
   url = 'https://github.com/IntMed/interage_python_sdk',
   download_url = 'https://github.com/IntMed/interage_python_sdk/archive/0.2.3.tar.gz',
-  keywords = ['interage', 'intmed', 'api', 'sdk'],
+  keywords = 'interage intmed api python sdk',
   classifiers = [],
 )

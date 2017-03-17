@@ -1,9 +1,10 @@
-from .base import APIModel, json_to_instance_list
+from . import APIModel
 from .properties import PropertyDescriptor, APIPropertyDescriptor
 from interage.api.config import APISettings
 
 class PrincipioAtivo(APIModel):
     @property
+    @PropertyDescriptor.serializable('nome')
     def nome(self):
         return self.__nome
 
@@ -11,18 +12,11 @@ class PrincipioAtivo(APIModel):
     @PropertyDescriptor.string
     def nome(self, val):
         self.__nome = val
-
-    @classmethod
-    def create_instance_from_json(cls, json):
-        instance = PrincipioAtivo()
-        instance.id = json['id']
-        instance.nome = json['nome']
-
-        return instance
 
 
 class Medicamento(APIModel):
     @property
+    @PropertyDescriptor.serializable('nome')
     def nome(self):
         return self.__nome
 
@@ -32,6 +26,7 @@ class Medicamento(APIModel):
         self.__nome = val
 
     @property
+    @PropertyDescriptor.serializable('principios_ativos', PrincipioAtivo)
     def principios_ativos(self):
         return self.__principios_ativos
 
@@ -41,6 +36,7 @@ class Medicamento(APIModel):
         self.__principios_ativos = val
 
     @property
+    @PropertyDescriptor.serializable('principios_ativos_anvisa')
     def principios_ativos_anvisa(self):
         return self.__principios_ativos_anvisa
 
@@ -49,19 +45,10 @@ class Medicamento(APIModel):
     def principios_ativos_anvisa(self, val):
         self.__principios_ativos_anvisa = val
 
-    @classmethod
-    def create_instance_from_json(cls, json):
-        instance = Medicamento()
-        instance.id = json['id']
-        instance.nome = json['nome']
-        instance.principios_ativos_anvisa = json['principios_ativos_anvisa']
-        instance.principios_ativos = json_to_instance_list(PrincipioAtivo, json['principios_ativos'])
-
-        return instance
-
 
 class Interacao(APIModel):
     @property
+    @PropertyDescriptor.serializable('evidencia')
     def evidencia(self):
         return self.__evidencia
 
@@ -71,6 +58,7 @@ class Interacao(APIModel):
         self.__evidencia = val
 
     @property
+    @PropertyDescriptor.serializable('acao')
     def acao(self):
         return self.__acao
 
@@ -80,6 +68,7 @@ class Interacao(APIModel):
         self.__acao = val
 
     @property
+    @PropertyDescriptor.serializable('gravidade')
     def gravidade(self):
         return self.__gravidade
 
@@ -89,6 +78,7 @@ class Interacao(APIModel):
         self.__gravidade = val
 
     @property
+    @PropertyDescriptor.serializable('principios_ativos', PrincipioAtivo)
     def principios_ativos(self):
         return self.__principios_ativos
 
@@ -96,14 +86,3 @@ class Interacao(APIModel):
     @PropertyDescriptor.list
     def principios_ativos(self, val):
         self.__principios_ativos = val
-
-    @classmethod
-    def create_instance_from_json(cls, json):
-        instance = Interacao()
-        instance.id = json['id']
-        instance.evidencia = json['evidencia']
-        instance.acao = json['acao']
-        instance.gravidade = json['gravidade']
-        instance.principios_ativos = json_to_instance_list(PrincipioAtivo, json['principios_ativos'])
-
-        return instance

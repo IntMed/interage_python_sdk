@@ -8,6 +8,7 @@ class APIModel(CreateInstanceFromJsonMixin):
         super(APIModel, self).__init__()
 
     @property
+    @PropertyDescriptor.serializable('id')
     def id(self):
         return self.__id
 
@@ -19,10 +20,3 @@ class APIModel(CreateInstanceFromJsonMixin):
 
 class APIMetadataModel(CreateInstanceFromJsonMixin):
     pass
-
-
-def json_to_instance_list(model, json):
-    if(issubclass(model, CreateInstanceFromJsonMixin)):
-        return [model.create_instance_from_json(record) for record in json]
-
-    raise AttributeError(messages.arg_issubclass_error.format('model', CreateInstanceFromJsonMixin.__name__))

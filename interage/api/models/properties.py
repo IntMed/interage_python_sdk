@@ -55,11 +55,6 @@ class PropertyDescriptor:
 
     @classmethod
     def integer(cls, func):
-        print(func.__name__)
-        return isinstance_wrapper(int)
-
-    @classmethod
-    def integer(cls, func):
         return isinstance_wrapper(func, int)
 
     @classmethod
@@ -69,6 +64,14 @@ class PropertyDescriptor:
     @classmethod
     def list(cls, func):
         return isinstance_wrapper(func, list)
+
+    @classmethod
+    def serializable(cls, name, ref = None):
+        def wrap(func):
+            func.serializable_ref = ref
+            func.serializable_name = name
+            return func
+        return wrap
 
 
 class APIPropertyDescriptor:

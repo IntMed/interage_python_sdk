@@ -1,4 +1,5 @@
 from interage.api import models
+from interage.api.exceptions import messages
 
 
 def json_to_instance_list(model, json):

@@ -66,7 +66,7 @@ class PropertyDescriptor:
         return isinstance_wrapper(func, list)
 
     @classmethod
-    def serializable_name(cls, name, ref = None):
+    def serializable(cls, name, ref = None):
         def wrap(func):
             func.serializable_ref = ref
             func.serializable_name = name

@@ -23,7 +23,7 @@ class InteracaoMetadata(APIMetadataModel):
         self.__acoes = val
 
     @property
-    @PropertyDescriptor.serializable('acao')
+    @PropertyDescriptor.serializable('gravidade')
     def gravidades(self):
         return self.__gravidades
 

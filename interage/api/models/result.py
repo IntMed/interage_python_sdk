@@ -1,6 +1,6 @@
 from interage.api.config import APISettings
 from interage.api.exceptions import HttpNotFoundError
-from .base import json_to_instance_list
+from interage.api.utils.models import json_to_instance_list
 
 
 class APIResult(object):

@@ -3,6 +3,7 @@ from .properties import PropertyDescriptor
 
 class InteracaoMetadata(APIMetadataModel):
     @property
+    @PropertyDescriptor.serializable('evidencia')
     def evidencias(self):
         return self.__evidencias
 
@@ -12,6 +13,7 @@ class InteracaoMetadata(APIMetadataModel):
         self.__evidencias = val
 
     @property
+    @PropertyDescriptor.serializable('acao')
     def acoes(self):
         return self.__acoes
 
@@ -21,6 +23,7 @@ class InteracaoMetadata(APIMetadataModel):
         self.__acoes = val
 
     @property
+    @PropertyDescriptor.serializable('gravidade')
     def gravidades(self):
         return self.__gravidades
 
@@ -28,12 +31,3 @@ class InteracaoMetadata(APIMetadataModel):
     @PropertyDescriptor.list
     def gravidades(self, val):
         self.__gravidades = val
-
-    @classmethod
-    def create_instance_from_json(self, json):
-        instance = InteracaoMetadata()
-        instance.evidencias = json['evidencia']
-        instance.acoes = json['acao']
-        instance.gravidades = json['gravidade']
-
-        return instance

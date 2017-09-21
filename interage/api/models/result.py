@@ -16,7 +16,7 @@ class APIResult(object):
         self._next     = response.get('next', None)
         self._previous = response.get('previous', None)
 
-    def __get_result_object(self, result):
+    def _get_result_object(self, result):
         return APIResult(
             response = result,
             client = self.client,
@@ -32,14 +32,14 @@ class APIResult(object):
     def next(self):
         if(self.has_next):
             result = self.client.request(self.next_url)
-            return self.__get_result_object(result)
+            return self._get_result_object(result)
 
         raise HttpNotFoundError()
 
     def previous(self):
         if(self.has_previous):
             result = self.client.request(self.previous_url)
-            return self.__get_result_object(result)
+            return self._get_result_object(result)
 
         raise HttpNotFoundError()
     

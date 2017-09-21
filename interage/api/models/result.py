@@ -8,13 +8,13 @@ class APIResult(object):
         super(APIResult, self).__init__()
         self.client = args.get('client')
         self.model_class = args.get('model_class')
-        self.__load_from_response(args.get('response'))
+        self._load_from_response(args.get('response'))
 
-    def __load_from_response(self, response):
-        self.__count    = response.get('count', 0)
-        self.__results  = response.get('results', [])
-        self.__next     = response.get('next', None)
-        self.__previous = response.get('previous', None)
+    def _load_from_response(self, response):
+        self._count    = response.get('count', 0)
+        self._results  = response.get('results', [])
+        self._next     = response.get('next', None)
+        self._previous = response.get('previous', None)
 
     def __get_result_object(self, result):
         return APIResult(
@@ -24,27 +24,36 @@ class APIResult(object):
         )
 
     def has_next(self):
-        return self.__next is not None
+        return self._next is not None
 
     def has_previous(self):
-        return self.__previous is not None
+        return self._previous is not None
 
     def next(self):
         if(self.has_next):
-            result = self.client.request(self.__next)
+            result = self.client.request(self.next_url)
             return self.__get_result_object(result)
 
         raise HttpNotFoundError()
 
     def previous(self):
         if(self.has_previous):
-            result = self.client.request(self.__previous)
+            result = self.client.request(self.previous_url)
             return self.__get_result_object(result)
 
         raise HttpNotFoundError()
+    
+    @property
+    def next_url(self):
+        return self._next
+    
+    @property
+    def previous_url(self):
+        return self._previous     
 
+    @property
     def count(self):
-        return self.__count
+        return self._count
 
     def json(self):
         return self.results(as_json = True)
@@ -54,6 +63,5 @@ class APIResult(object):
 
     def results(self, as_json):
         if(as_json):
-            return self.__results
-
-        return json_to_instance_list(self.model_class, self.__results)
+            return self._results
+        return json_to_instance_list(self.model_class, self._results)

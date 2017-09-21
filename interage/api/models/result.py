@@ -31,18 +31,27 @@ class APIResult(object):
 
     def next(self):
         if(self.has_next):
-            result = self.client.request(self.__next)
+            result = self.client.request(self.next_url)
             return self.__get_result_object(result)
 
         raise HttpNotFoundError()
 
     def previous(self):
         if(self.has_previous):
-            result = self.client.request(self.__previous)
+            result = self.client.request(self.previous_url)
             return self.__get_result_object(result)
 
         raise HttpNotFoundError()
+    
+    @property
+    def next_url(self):
+        return self.__next
+    
+    @property
+    def previous_url(self):
+        return self.__previous     
 
+    @property
     def count(self):
         return self.__count
 

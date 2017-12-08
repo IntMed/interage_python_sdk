@@ -1,7 +1,15 @@
-from interage.api.exceptions.http import (HttpForbiddenError, HttpForbiddenError, HttpNotFoundError, get_http_error)
-from interage.api.exceptions.attribute import (InvalidPropertyAssignmentError, UnknowPropertyAssignmentError)
+from interage.api.exceptions.http import (
+    HttpError, get_http_error,
+    HttpBadRequestError, HttpNotFoundError, 
+    HttpForbiddenError, HttpTooManyRequestsError,
+)
+from interage.api.exceptions.attribute import (
+    InvalidPropertyAssignmentError, UnknowPropertyAssignmentError
+)
 
 __all__ = [
-    'HttpBadRequestError', 'HttpForbiddenError', 'HttpNotFoundError', 'get_http_error',
+    'HttpError', 'get_http_error',
+    'HttpBadRequestError', 'HttpNotFoundError', 
+    'HttpForbiddenError', 'HttpTooManyRequestsError',
     'InvalidPropertyAssignmentError','UnknowPropertyAssignmentError',
 ]

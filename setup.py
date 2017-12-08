@@ -4,7 +4,7 @@ from setuptools import find_packages
 setup(
   name = "interage_python_sdk",
   packages = find_packages(),
-  version = "0.3.1",
+  version = "0.3.2",
   description = "SDK oficialmente mantido pela IntMed Software para auxiliar no desenvolvimento de aplicações em Python integradas ao serviço de interações medicamentosas do sistema Interage",
   author = "IntMed Software",
   author_email = "contato@intmed.com.br",

@@ -8,19 +8,23 @@ class HttpError(Exception):
     
     def __init__(self, response):
         try:
-            except_message = response.json()[self.response_attr]
+            self._json = response.json()
+            except_message = self.json()[self.response_attr]
             if(isinstance(except_message, list)):
                 except_message = except_message[0]
         except:
             except_message = self.default_message
         finally:
             super(HttpError, self).__init__(except_message)
+    
+    def json(self):
+        return self._json
 
 
 class HttpBadRequestError(HttpError):
     status_code = 400
     response_attr = 'non_field_errors'
-    default_message = messages.invalid_credentials_error
+    default_message = messages.bad_request_error
 
 
 class HttpForbiddenError(HttpError):

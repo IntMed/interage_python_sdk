@@ -1,6 +1,8 @@
+import os
+
 # API General
-VERSION = 'v1'
-API_URL = 'https://api.interage.intmed.com.br'
+VERSION = os.getenv('INTERAGE_API_VERSION', 'v1')
+API_URL = os.getenv('INTERAGE_API_URL', 'https://api.interage.intmed.com.br')
 AUTH_KEYS = ['username', 'password']
 
 # URIs

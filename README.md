@@ -94,6 +94,16 @@ while(result.has_next()):
         print(objects[i].nome)
     result = result.next()
 ```
+
+## Configuração
+Talvez o seu projeto que utilize o Interage Python SDK tenha determinadas particularidades no uso da API do Interage, como uma distribuição própria. Neste caso, é possível configurar o comportamento do SDK através variáveis de ambiente. São elas:
+
+| Variável | Descrição | Valor padrão |
+| --- | --- | --- |
+| `INTERAGE_API_URL` | URL de conexão onde se encontra uma distribuição da API do Interage que se deseja utilizar | `https://api.interage.intmed.com.br` |
+| `INTERAGE_API_VERSION` | Versão da API do Interage que se esteja utilizando. Este valor é anexado a URL de conexão durante as requisições para a API | `v1` |
+
+
 ## Reportando problemas
 Se você tem sugestões, bugs ou outros tipos de problemas com este SDK, esteja livre para reportar [aqui](https://github.com/weynelucas/interage_python_sdk/issues). Ou simplesmente envie um pull request.
 

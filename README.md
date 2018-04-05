@@ -98,10 +98,10 @@ while(result.has_next()):
 ## Configuração
 Talvez o seu projeto que utilize o Interage Python SDK tenha determinadas particularidades no uso da API do Interage, como uma distribuição própria. Neste caso, é possível configurar o comportamento do SDK através variáveis de ambiente. São elas:
 
-| Variável | Descrição | Valor padrão |
-| --- | --- | --- |
-| `INTERAGE_API_URL` | URL de conexão onde se encontra uma distribuição da API do Interage que se deseja utilizar | `https://api.interage.intmed.com.br` |
-| `INTERAGE_API_VERSION` | Versão da API do Interage que se esteja utilizando. Este valor é anexado a URL de conexão durante as requisições para a API | `v1` |
+| Variável               | Descrição                                                                                                                   | Valor padrão                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `INTERAGE_API_URL`     | URL de conexão onde se encontra uma distribuição da API do Interage que se deseja utilizar                                  | `https://api.interage.intmed.com.br` |
+| `INTERAGE_API_VERSION` | Versão da API do Interage que se esteja utilizando. Este valor é anexado a URL de conexão durante as requisições para a API | `v1`                                 |
 
 
 ## Reportando problemas

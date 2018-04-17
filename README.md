@@ -121,3 +121,4 @@ Para mais dúvidas sobre os parâmetros, endpoints, criação de tokens e outras
 - 0.3.1 - 21/09/2017 - Adição das propriedades `next_url` e `previous_url` nos objetos do tipo `APIResult`
 - 0.3.2 - 07/12/2017 - Disponibilização e correção de erros HTTP
 - 0.4.0 - 04/04/2018 - Permitindo configuração via variáveis de ambiente
+- 0.4.1 - 17/04/2018 - Corrigindo visualização da documentação da biblioteca

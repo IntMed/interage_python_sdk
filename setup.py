@@ -17,7 +17,7 @@ setup(
   author_email = "contato@intmed.com.br",
   url = "https://github.com/IntMed/interage_python_sdk",
   download_url = "https://github.com/IntMed/interage_python_sdk/archive/0.4.1.tar.gz",
-  keywords = "interage intmed api python sdk interage-python-sdk",
+  keywords = "interage intmed api python sdk interage-python-sdk health",
   classifiers=[ 
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
